@@ -4,7 +4,9 @@ import java.io.IOException;
 public class gitTester {
     public static void main(String[] args) throws IOException {
         Git.initGitRepo();
-        checkAndDelete();
+        //checkAndDelete();
+        File indexFile = new File("git/index");
+        System.out.println(Git.generateFileName(indexFile));
     }
 
     //checks if all correct files exist in their propper locations and then deletes them after
