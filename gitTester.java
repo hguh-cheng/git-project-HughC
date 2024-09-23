@@ -3,7 +3,10 @@ import java.io.IOException;
 
 public class gitTester {
     public static void main(String[] args) throws IOException {
+        checkAndDelete();
         Git repo = new Git();
+        File testFile = new File("testfile.txt");
+        repo.makeBlob(testFile);
     }
 
     //checks if all correct files exist in their propper locations and then deletes them after

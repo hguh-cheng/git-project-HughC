@@ -1,4 +1,8 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
@@ -25,6 +29,7 @@ public class Git{
 
         File indexFile = new File("git/index");
 
+        //exist check
         if (gitDir.exists() && objectsDir.exists() && indexFile.exists()){
             System.out.println("Git Repository already exists");
         }
@@ -78,7 +83,30 @@ public class Git{
     public void makeBlob(File input) throws IOException{
         String fileName = generateFileName(input);
 
+        //creates empty file in objects directory
         File copy = new File("git/objects/" + fileName);
+        copy.createNewFile();
 
+
+
+        //should make into bufferedInputStream and BufferedOutputStream later
+        FileInputStream in = new FileInputStream(input);
+
+        FileOutputStream out = new FileOutputStream(copy);
+
+        //copies the contents of the file
+        int n;
+        while ((n = in.read()) != -1){
+            out.write(n);
+        }
+        in.close();
+        out.close();
+
+
+
+        //inserts an entry into index file
+        FileWriter fw = new FileWriter("git/index");
+        fw.write(fileName + " " + input.getName());
+        fw.close();
     }
 }
