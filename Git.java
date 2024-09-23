@@ -8,11 +8,16 @@ import java.security.NoSuchAlgorithmException;
 
 public class Git{
     public static void main(String[] args) throws IOException {
+
+    }
+
+    //constructor
+    public Git () throws IOException{
         initGitRepo();
     }
 
     //makes a Git Repo in the current folder 
-    public static void initGitRepo() throws IOException{
+    private void initGitRepo() throws IOException{
 
         File gitDir = new File("git");
 
@@ -36,8 +41,8 @@ public class Git{
         }
     }
     
-
-    public static String generateFileName(File input) throws IOException{
+    //generates the hash string name according to SHA1
+    private String generateFileName(File input) throws IOException{
                 try {
             
             // getInstance() method is called with algorithm SHA-1
@@ -67,5 +72,13 @@ public class Git{
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    //
+    public void makeBlob(File input) throws IOException{
+        String fileName = generateFileName(input);
+
+        File copy = new File("git/objects/" + fileName);
+
     }
 }
